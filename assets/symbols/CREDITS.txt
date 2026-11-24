@@ -1,0 +1,4 @@
+Most picture symbols: Mulberry Symbols (https://mulberrysymbols.org), by Steve Lee and contributors,
+licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+Own drawings: water, yes, no, yesno, next, back, continue, language.
+Please keep this notice in the app's About / documentation.

@@ -1,0 +1,7 @@
+PyQt6>=6.7.0
+opencv-python>=4.10.0
+mediapipe==0.10.14
+numpy>=1.26.4,<2.0.0
+pyttsx3>=2.90
+pygame>=2.6.0
+espeakng-loader==0.2.4

@@ -1,0 +1,44 @@
+import asyncio
+import edge_tts
+from nlp.languages import LANGUAGES
+from nlp.audio_cache import audio_path
+
+# Natural female voices matching your existing pre-recorded clips
+VOICES = {
+    "te": "te-IN-ShrutiNeural",
+    "en": "en-IN-NeerjaNeural",
+    "hi": "hi-IN-SwaraNeural",
+}
+
+
+def _all_sentences():
+    """Collect every spoken sentence defined in nlp/languages.py."""
+    for code, lang in LANGUAGES.items():
+        for entry in lang["menu"]:
+            if entry.get("type") == "sentence" and entry.get("sentence"):
+                yield code, entry["sentence"]
+            elif entry.get("type") == "category":
+                for item in entry.get("items", []):
+                    if item.get("sentence"):
+                        yield code, item["sentence"]
+
+
+async def generate_missing():
+    voice_override = None
+    generated = 0
+    for code, sentence in _all_sentences():
+        out_path = audio_path(code, sentence)
+        if out_path.exists():
+            continue
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        voice = VOICES[code]
+        print(f"Generating [{code}] -> {out_path.name} : {sentence}")
+        communicate = edge_tts.Communicate(sentence, voice, rate="-10%")
+        await communicate.save(str(out_path))
+        generated += 1
+
+    print(f"\nDone! Generated {generated} new audio clip(s).")
+
+
+if __name__ == "__main__":
+    asyncio.run(generate_missing())

@@ -1,0 +1,31 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+.venv311/
+venv/
+env/
+tts_env/
+.env
+
+# Editor and operating system files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Local logs and calibration data
+*.log
+logs/
+
+# Voice models downloaded separately
+models/
+*.onnx
+*.onnx.json
+
+# Local updater scripts and their backups
+before-caregiver-*/
+update_caregiver.py
+update_eyegaze.py
+update_card_settings.py
